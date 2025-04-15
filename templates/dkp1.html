@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{{ super() }}
+
+{% for cat, msg in get_flashed_messages(True) %}
+<div class="flash {{cat}}">{{msg}}</div>
+{% endfor %}
+
+<form action="{{url_for('show_dkp1', id_dkp1=id)}}" method="post" style="width: 700px;">
+    <div class="row">
+        <div class="form-group col">
+            <label for="dkp_number">DKP number</label>
+            <input type="text" class="form-control" id="dkp_number" name="number" value={{ dkp1.number }}>
+        </div>
+        <div class="form-group col">
+            <label for="seller">Seller</label>
+            <input type="text" class="form-control" id="seller" name="seller" value={{ dkp1.seller }}>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col" style="margin-top: 15px;">
+            <label for="contract_date">Date</label>
+            <input type="date" class="form-control" id="contract_date" name="contract_date" value={{ dkp1.contract_date }}>
+        </div>
+        <div class="form-group col" style="margin-top: 15px;">
+            <label for="buyer">Buyer</label>
+            <input type="text" class="form-control" id="buyer" name="buyer" value={{ dkp1.buyer }}>
+        </div>
+    </div>
+    <button class="btn btn-primary" type="submit" style="margin: 15px;">Submit</button>
+</form>
+
+<div class="row align-items-center">
+  <div class="col-sm-2">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Реестр</h5>
+        <p class="card-text">Short version comment</p>
+        <a href="#" class="btn btn-primary">Create</a>
+      </div>
+    </div>
+  </div>
+    <div class="col-sm-1">
+    <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" fill="currentColor" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
+      <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"/>
+    </svg>
+    </div>
+  <div class="col-sm-2">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Прием на хранение</h5>
+        <p class="card-text">Комментарий</p>
+        <a href="#" class="btn btn-primary">Create</a>
+      </div>
+    </div>
+  </div>
+    <div class="col-sm-1">
+        <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" fill="currentColor" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"/>
+        </svg>
+    </div>
+    <div class="col-sm-2">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Возврат с хранения</h5>
+                <p class="card-text">Комментарий</p>
+                <a href="#" class="btn btn-primary">Create</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<hr />
+<h2>Автомобили:</h2>
+
+<div>
+  <label for="input_excel_cars_file" class="form-label">Import car list from Excel:</label>
+  <div class="input-group mb-3">
+    <input type="file" class="form-control" id="input_excel_cars_file" accept='.xlsx, .xls'>
+    <label class="input-group-text" for="input_excel_cars_file">Upload</label>
+  </div>
+</div>
+<table id="car_list" class="table table-striped table-hover">
+  <thead>
+  <tr>
+    <th>VIN</th>
+    <th>Mark</th>
+    <th>Model</th>
+    <th>Color</th>
+    <th>Price</th>
+    <th>DKP2</th>
+      <th>Registry</th>
+  </tr>
+  </thead>
+  <tbody>
+  {% for car in car_list %}
+    <tr >
+      <td><a href="{{ url_for('show_car', car_id=car.id)}}">{{ car.vin|default('', true) }}</a></td>
+      <td>{{ car.mark|default('', true) }}</td>
+      <td>{{ car.model|default('', true) }}</td>
+      <td>{{ car.color|default('', true) }}</td>
+      <td>{{ car.price|default('', true) }}</td>
+      <td>{{ car.number|default('', true) }}</td>
+        <td>
+            <input class="form-check-input" type="checkbox" value="" id="registry_checked" checked>
+        </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

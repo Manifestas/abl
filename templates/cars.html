@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{{ super() }}
+
+{% for cat, msg in get_flashed_messages(True) %}
+<div class="flash {{cat}}">{{msg}}</div>
+{% endfor %}
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <form style="width: 400px;" action="{{url_for('show_car', car_id=car.id)}}" method="post">
+        <div class="form-group">
+          <label for="vin">VIN</label>
+          <input type="text" class="form-control" id="vin" name="number" value={{ car.vin }}>
+        </div>
+        <div class="form-group">
+          <label for="mark">Mark</label>
+          <input type="text" class="form-control" id="mark" name="number" value={{ car.mark }}>
+        </div>
+        <div class="form-group">
+          <label for="model">Model</label>
+          <input type="text" class="form-control" id="model" name="number" value={{ car.model }}>
+        </div>
+        <div class="form-group">
+          <label for="color">Color</label>
+          <input type="text" class="form-control" id="color" name="number" value={{ car.color }}>
+        </div>
+        <div class="form-group">
+          <label for="country">Country</label>
+          <input type="text" class="form-control" id="country" name="number" value={{ car.country }}>
+        </div>
+        <div class="form-group">
+          <label for="body_number">Body number</label>
+          <input type="text" class="form-control" id="body_number" name="number" value={{ car.body_number }}>
+        </div>
+        <div class="form-group">
+          <label for="engine">Engine</label>
+          <input type="text" class="form-control" id="engine" name="number" value={{ car.engine }}>
+        </div>
+        <button class="btn btn-primary" type="submit" style="margin: 15px;">Submit</button>
+      </form>
+    </div>
+    <div class="col order-1">
+      comparison with epts data
+    </div>
+  </div>
+</div>
+
+<div class="row align-items-center">
+  <div class="col-sm-2">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Реестр</h5>
+        <p class="card-text">Short version comment</p>
+        <a href="#" class="btn btn-primary">Create</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-1">
+    <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" fill="currentColor" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
+      <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"/>
+    </svg>
+  </div>
+  <div class="col-sm-2">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Прием на хранение</h5>
+        <p class="card-text">Комментарий</p>
+        <a href="#" class="btn btn-primary">Create</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-1">
+    <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" fill="currentColor" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
+      <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"/>
+    </svg>
+  </div>
+  <div class="col-sm-2">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Возврат с хранения</h5>
+        <p class="card-text">Комментарий</p>
+        <a href="#" class="btn btn-primary">Create</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock %}
